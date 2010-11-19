@@ -1,0 +1,7 @@
+Flask==0.6
+Jinja2==2.5.5
+Werkzeug==0.6.2
+httplib2==0.6.0
+python-dateutil==1.5
+-e git://github.com/eyeseast/python-nytcongress.git@2bb8314432e28142ca0e64d11ec142a7f5da44b1#egg=python_nytcongress-0.1.0-py2.6-dev
+wsgiref==0.1.2

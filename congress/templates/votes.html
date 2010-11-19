@@ -1,31 +1,56 @@
 {% extends "base.html" %}
 
+{% block css %}
+{{ super() }}
+<style type="text/css">
+h2 { margin-bottom: 0px; }
+div.vote { padding: .5 em; color: #8a8a8a; border-bottom: #e3e3e3 1px solid; margin-top: 1.5em; }
+div.vote.last { border: none; margin-bottom: 2em; }
+p.question { font-size: .8em; }
+p.description { margin-bottom: .75em; }
+
+</style>
+{% endblock %}
+
 {% block content %}
-<div id="house">
+<div id="chambers">
+	<ul>
+		<li><a href="#house">House of Representatives</a></li>
+		<li><a href="#senate">Senate</a></li>
+	</ul>
+<div id="house" class="chamber clear">
 	<h2>House of Representatives</h2>
 	<div class="votes">
 		{% for vote in house.votes %}
-		<div class="vote {{ vote.result }}">
+		<div class="span-16 vote {{ vote.result }} {% if loop.last %}last{% endif %}">
 			<div class="details">
 				<p class="description">{{ vote.description }}</p>
-				<p class="question">{{ vote.question }}: <strong>{{ vote.result }}</strong></p>
+				<p class="question">{{ vote.question }}: 
+					<strong>
+						<a href="{{ url_for('vote_detail', congress=vote.congress, chamber='house', session=vote.session, rollcall=vote.roll_call) }}">{{ vote.result }}</a>
+					</strong>
+				</p>
 			</div>
 		</div>
 		{% endfor %}
 	</div>
 </div>
-<div id="senate">
+<div id="senate" class="chamber clear">
 	<h2>Senate</h2>
 	<div class="votes">
 		{% for vote in senate.votes %}
-		<div class="vote {{ vote.result }}">
+		<div class="span-16 vote {{ vote.result }}">
 			<div class="details">
 				<p class="description">{{ vote.description }}</p>
-				<p class="question">{{ vote.question }}: <strong>{{ vote.result }}</strong></p>
+				<p class="question">{{ vote.question }}: 
+					<strong>
+						<a href="{{ url_for('vote_detail', congress=vote.congress, chamber='senate', session=vote.session, rollcall=vote.roll_call) }}">{{ vote.result }}</a>
+					</strong>
+				</p>
 			</div>
 		</div>
 		{% endfor %}
 	</div>
-
+</div>
 </div>
 {% endblock %}

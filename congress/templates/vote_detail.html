@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="title">
+	<h2>{{ vote.description }}</h2>
+	<p class="quiet">{{ vote.question }}: <strong>{{ vote.result }}</strong></p>
+</div>
+<div id="results">
+	<h3>Results</h3>
+	<ul>
+		<li class="yes"><strong>Yes</strong>: {{ vote.total.yes }}</li>
+		<li class="no"><strong>No</strong>: {{ vote.total.no }}</li>
+		<li class="present"><strong>Present</strong>: {{ vote.total.present }}</li>
+		<li class="missed"><strong>Not Voting</strong>: {{ vote.total.not_voting }}</li>
+	</ul>
+</div>
+
+{% endblock %}
