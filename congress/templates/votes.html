@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div id="house">
+	<h2>House of Representatives</h2>
+	<div class="votes">
+		{% for vote in house.votes %}
+		<div class="vote {{ vote.result }}">
+			<div class="details">
+				<p class="description">{{ vote.description }}</p>
+				<p class="question">{{ vote.question }}: <strong>{{ vote.result }}</strong></p>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+</div>
+<div id="senate">
+	<h2>Senate</h2>
+	<div class="votes">
+		{% for vote in senate.votes %}
+		<div class="vote {{ vote.result }}">
+			<div class="details">
+				<p class="description">{{ vote.description }}</p>
+				<p class="question">{{ vote.question }}: <strong>{{ vote.result }}</strong></p>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+
+</div>
+{% endblock %}

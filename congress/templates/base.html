@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	<meta charset="UTF-8" />
+		<title>{% block title %}Hello, Congress!{% endblock %}</title>
+	</head>
+	<body>
+		<div id="header">
+			<div id="masthead">
+			{% block masthead %}
+			<h1>Hello, Congress!</h1>
+			{% endblock %}
+			</div>
+		</div>
+		<div id="main">
+			<div id="content">{% block content %}{% endblock %}</div>
+		</div>
+		<div id="bottom">
+			<div id="footer">{% block footer %}{% endblock %}</div>
+		</div>
+	</body>
+</html>
