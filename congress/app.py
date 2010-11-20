@@ -31,13 +31,27 @@ def home():
     senate = nyt.votes.by_range('senate', today, today - datetime.timedelta(days=3))
     return render_template('votes.html', house=house, senate=senate)
 
+# Get votes from a specific chamber, for this month
+@app.route('/<chamber>')
+def chamber(chamber):
+    today = datetime.date.today()
+    votes = nyt.votes.by_month(chamber, today.year, today.month)
+    return render_template('votes.html', **{chamber: votes})
+
 # Get a specific rollcall vote. The Times puts pretty much everything
 # we need in one API call, and the data we need to link here will
 # be in the votes returned in our index view above.
 @app.route('/<int:congress>/<chamber>/<int:session>/<int:rollcall>')
 def vote_detail(congress, chamber, session, rollcall):
-    vote = nyt.votes.get(chamber, rollcall, session, congress)
-    return render_template('vote_detail.html', vote=vote['votes']['vote']) # just trimming a little fat here
+    # just trimming a little fat here
+    vote = nyt.votes.get(chamber, rollcall, session, congress)['votes']['vote']
+    return render_template('vote_detail.html', vote=vote) 
+
+# Get a bill
+@app.route('/<int:congress>/bills/<bill_id>')
+def bill_detail(congress, bill_id):
+    bill = nyt.bills.get(bill_id, congress)
+    return render_template('bill_detail.html', bill=bill)
 
 # Make it go.
 if __name__ == "__main__":

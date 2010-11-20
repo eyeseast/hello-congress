@@ -5,6 +5,7 @@
 <style type="text/css">
 h2 { margin-bottom: 0px; }
 div.vote { padding: .5 em; color: #8a8a8a; border-bottom: #e3e3e3 1px solid; margin-top: 1.5em; }
+div.vote:hover { color: #3f3f3f; }
 div.vote.last { border: none; margin-bottom: 2em; }
 p.question { font-size: .8em; }
 p.description { margin-bottom: .75em; }
@@ -14,14 +15,21 @@ p.description { margin-bottom: .75em; }
 
 {% block content %}
 <div id="chambers">
+	{% if house and senate %}
 	<ul>
 		<li><a href="#house">House of Representatives</a></li>
 		<li><a href="#senate">Senate</a></li>
 	</ul>
+	{% endif %}
+{% if house %}
 <div id="house" class="chamber clear">
 	<h2>House of Representatives</h2>
+	{% if house and senate %}
+	<p class="more clear small"><a href="{{ url_for('chamber', chamber='house') }}">More</a></p>
+	{% endif %}
 	<div class="votes">
 		{% for vote in house.votes %}
+
 		<div class="span-16 vote {{ vote.result }} {% if loop.last %}last{% endif %}">
 			<div class="details">
 				<p class="description">{{ vote.description }}</p>
@@ -32,11 +40,17 @@ p.description { margin-bottom: .75em; }
 				</p>
 			</div>
 		</div>
+
 		{% endfor %}
 	</div>
 </div>
+{% endif %}
+{% if senate %}
 <div id="senate" class="chamber clear">
 	<h2>Senate</h2>
+	{% if house and senate %}
+	<p class="more small clear"><a href="{{ url_for('chamber', chamber='senate') }}">More</a></p>
+	{% endif %}
 	<div class="votes">
 		{% for vote in senate.votes %}
 		<div class="span-16 vote {{ vote.result }}">
@@ -52,5 +66,6 @@ p.description { margin-bottom: .75em; }
 		{% endfor %}
 	</div>
 </div>
+{% endif %}
 </div>
 {% endblock %}

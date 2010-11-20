@@ -1,12 +1,30 @@
 {% extends "base.html" %}
 
+{% block js %}
+{{ super() }}
+{# <script src="http://cachedcommons.org/cache/raphael/1.4.7/javascripts/raphael.js" type="text/javascript"></script>
+<script>
+function squareVotes() {
+	// make little squares representing votes here
+};
+
+$(document).ready(function() {
+	// window.R = Raphael('paper', '100%', 100);
+	// positions = {yes: R.set(), no: R.set()};
+	
+});
+</script> #}
+{% endblock %}
+
 {% block content %}
 <div class="title">
 	<h2>{{ vote.description }}</h2>
 	<p class="quiet">{{ vote.question }}: <strong>{{ vote.result }}</strong></p>
+	{# <p class="small"><a href="{{ url_for('bill_detail', congress=vote.congress, bill_id=bill.) }}">More</a></p> #}
 </div>
 <div id="results">
 	<h3>Results</h3>
+	<div id="paper"></div>
 	<ul>
 		<li class="yes"><strong>Yes</strong>: {{ vote.total.yes }}</li>
 		<li class="no"><strong>No</strong>: {{ vote.total.no }}</li>
@@ -14,5 +32,13 @@
 		<li class="missed"><strong>Not Voting</strong>: {{ vote.total.not_voting }}</li>
 	</ul>
 </div>
+<div class="bill">
 
+</div>
+{% endblock %}
+
+{% block end %}
+<script>
+var VOTE = {{ vote|tojson|safe }}
+</script>
 {% endblock %}

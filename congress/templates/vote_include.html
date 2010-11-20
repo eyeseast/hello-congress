@@ -1,0 +1,10 @@
+		<div class="span-16 vote {{ vote.result }} {% if loop.last %}last{% endif %}">
+			<div class="details">
+				<p class="description">{{ vote.description }}</p>
+				<p class="question">{{ vote.question }}: 
+					<strong>
+						<a href="{{ url_for('vote_detail', congress=vote.congress, chamber='house', session=vote.session, rollcall=vote.roll_call) }}">{{ vote.result }}</a>
+					</strong>
+				</p>
+			</div>
+		</div>
