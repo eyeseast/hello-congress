@@ -55,4 +55,4 @@ def bill_detail(congress, bill_id):
 
 # Make it go.
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host='0.0.0.0', debug=True)
