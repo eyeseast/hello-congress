@@ -1,7 +1,9 @@
-Flask==0.6
-Jinja2==2.5.5
-Werkzeug==0.6.2
-httplib2==0.6.0
-python-dateutil==1.5
--e git://github.com/eyeseast/python-nytcongress.git
-wsgiref==0.1.2
+# Flask and requirements
+Flask
+Jinja2
+Werkzeug
+
+# Python NytCongress and requirements
+httplib2
+python-dateutil
+-e git://github.com/eyeseast/python-nytcongress.git#egg=python_nytcongress
